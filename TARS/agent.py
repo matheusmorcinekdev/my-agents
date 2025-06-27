@@ -1,6 +1,6 @@
 from google.adk.agents import Agent
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
-from TARS.tools import get_special_message, call_node_script, get_bitcoin_price, fetch_calendar_events
+from TARS.tools import get_special_message, call_node_script, get_bitcoin_price
 
 from TARS.prompt import DB_MCP_PROMPT
 
@@ -12,11 +12,14 @@ root_agent = Agent(
     tools=[get_special_message, 
            call_node_script, 
            get_bitcoin_price,
-           fetch_calendar_events,
            MCPToolset(
                 connection_params=StdioServerParameters(
                     command="npx",
-                    args=["-y", "@modelcontextprotocol/server-puppeteer"]
+                    args=["-y", "@modelcontextprotocol/server-puppeteer"],
+                    env={
+                        "PUPPETEER_LAUNCH_OPTIONS": '{"headless": false, "defaultViewport": {"width": 375, "height": 812, "deviceScaleFactor": 3, "isMobile": true, "hasTouch": true, "isLandscape": false}, "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"}',
+                        "ALLOW_DANGEROUS": "true"
+                    }
                 )
            )]
 )
