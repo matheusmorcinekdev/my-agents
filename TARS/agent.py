@@ -17,7 +17,7 @@ root_agent = Agent(
                     command="npx",
                     args=["-y", "@modelcontextprotocol/server-puppeteer"],
                     env={
-                        "PUPPETEER_LAUNCH_OPTIONS": '{"headless": false, "defaultViewport": {"width": 375, "height": 812, "deviceScaleFactor": 3, "isMobile": true, "hasTouch": true, "isLandscape": false}, "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"}',
+                        "PUPPETEER_LAUNCH_OPTIONS": '{"headless": true, "timeout": 30000, "defaultViewport": {"width": 375, "height": 812, "deviceScaleFactor": 3, "isMobile": true, "hasTouch": true, "isLandscape": false}, "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"}',
                         "ALLOW_DANGEROUS": "true"
                     }
                 )
