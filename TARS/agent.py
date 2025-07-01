@@ -1,8 +1,11 @@
+from pathlib import Path
 from google.adk.agents import Agent
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 from TARS.tools import get_special_message, call_node_script, get_bitcoin_price
 
 from TARS.prompt import DB_MCP_PROMPT
+
+LOCAL_MPC_TEST_PATH = str((Path(__file__).parent.parent / "local_mcp" / "index.js").resolve())
 
 root_agent = Agent(
     name="TARS",
@@ -21,5 +24,11 @@ root_agent = Agent(
                         "ALLOW_DANGEROUS": "true"
                     }
                 )
+           ),
+           MCPToolset(
+               connection_params=StdioServerParameters(
+                   command="node",
+                   args=[LOCAL_MPC_TEST_PATH]
+               )
            )]
 )
